@@ -21,40 +21,45 @@ class LandingPage extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget{
-  const HomePage ({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SafeArea(
         child: Column(
-          
           children: [
             const SizedBox(height: 20),
-            const Text('Welcome to the Denso Homepage',
-            textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 15),),
+            const Text(
+              'Welcome to the Denso Homepage',
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+            const Text(
+              'name of client',
+              textAlign: TextAlign.left,
+            ),
+            const SizedBox(height: 20),
             CarouselSlider(
-              items: [1,2,3,4].map((i) {
-              return Container(
-                //this makes each container widget width fit the entire screen
-                width: MediaQuery.of(context).size.width,
-                //this sets the space between each of the container widgets
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                  //use the color gray to check the size of the widgets
-                  //color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Center(
-                  child: Text(
-                    "text: $i"
+              items: [1, 2, 3, 4].map((i) {
+                return Container(
+                  //this makes each container widget width fit the entire screen
+                  width: MediaQuery.of(context).size.width,
+                  //this sets the space between each of the container widgets
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    //use the color gray to check the size of the widgets
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-              );
-            }).toList(), 
-            options: CarouselOptions(height: 250),)
+                  child: Center(
+                    child: Text("text: $i"),
+                  ),
+                );
+              }).toList(),
+              options: CarouselOptions(height: 250),
+            )
           ],
         ),
       ),
