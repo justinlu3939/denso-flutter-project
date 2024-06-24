@@ -32,6 +32,9 @@ class HomePage extends StatelessWidget{
           
           children: [
             const SizedBox(height: 20),
+            const Text('Welcome to the Denso Homepage',
+            textAlign: TextAlign.left,
+            style: TextStyle(fontSize: 15),),
             CarouselSlider(
               items: [1,2,3,4].map((i) {
               return Container(
