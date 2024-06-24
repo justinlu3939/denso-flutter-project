@@ -26,12 +26,14 @@ class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
-      child: Column(
-        
-        children: [
-          SizedBox(height: 20),
-          Text("Hello",),
-        ],
+      child: SafeArea(
+        child: Column(
+          
+          children: [
+            SizedBox(height: 20),
+            Text("Hello",),
+          ],
+        ),
       ),
     );
   }
