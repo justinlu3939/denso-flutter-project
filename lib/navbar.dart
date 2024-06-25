@@ -61,7 +61,7 @@ class Navbar extends StatelessWidget {
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.all(10),
-                  leading: Icon(Icons.account_circle_sharp),
+                  leading: Icon(Icons.perm_device_info),
                   title: Text("About DENSO"),
                   onTap: () {
                     //Navigator.of(context).pushNamed('/webviewcontainer');

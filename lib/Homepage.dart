@@ -21,6 +21,20 @@ class LandingPage extends StatelessWidget {
   }
 }
 
+class WelcomeText extends StatelessWidget
+{
+  const WelcomeText({super.key});
+  @override
+  Widget build(BuildContext context)
+  {
+    return const Text(
+            'Welcome to the Denso Homepage\nname of client',
+            textAlign: TextAlign.left,
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          );
+  }
+}
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -31,15 +45,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            const Text(
-              'Welcome to the Denso Homepage',
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-            ),
-            const Text(
-              'name of client',
-              textAlign: TextAlign.left,
-            ),
+            const WelcomeText(),
             const SizedBox(height: 20),
             CarouselSlider(
               items: [1, 2, 3, 4].map((i) {
@@ -66,3 +72,5 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+//https://www.denso.com/global/en/news/newsroom/2024/20240613-g01
