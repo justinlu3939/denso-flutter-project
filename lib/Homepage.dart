@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/navbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+//import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 //might potentially use this dependency
 //import 'package:flutter_svg/flutter_svg.dart';
@@ -56,7 +57,7 @@ class HomePage extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
                     //use the color gray to check the size of the widgets
-                    color: Colors.grey[300],
+                    //color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Center(
@@ -65,12 +66,16 @@ class HomePage extends StatelessWidget {
                 );
               }).toList(),
               options: CarouselOptions(height: 250),
-            )
+            ),
+            // const SizedBox(height: 10),
+            // buildIndictor(),
           ],
         ),
       ),
     );
   }
+  // Widget buildIndictor() => AnimatedSmoothIndicator(
+  //   activeIndex: i, count: 4);
 }
 
 //https://www.denso.com/global/en/news/newsroom/2024/20240613-g01
