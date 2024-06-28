@@ -75,7 +75,7 @@ class Navbar extends StatelessWidget {
                   title: Text('Home page'),
                   onTap: () {
                     Navigator.pushNamed(context, '/landingpage');
-                  },
+                  }
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.all(10),
