@@ -74,7 +74,6 @@ class MyApp extends StatelessWidget {
                       ModalRoute.of(context)?.settings.arguments as String),
               '/settings': (context) => const Settings(),
               '/signout': (context) => LoginPage(),
-              //'/loginpage': (context) => SplashScreen(),
             },
           );
         },
