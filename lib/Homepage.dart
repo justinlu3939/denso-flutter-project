@@ -4,7 +4,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 //import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:my_app/components/data.dart';
-import 'dart:ui' as ui;
+
+//this import is for the gradient text
+//import 'dart:ui' as ui;
 
 //might potentially use this dependency
 //import 'package:flutter_svg/flutter_svg.dart';
@@ -35,7 +37,7 @@ class WelcomeText extends StatelessWidget {
     //     ? Colors.white
     //     : Colors.black;
 
-    return Text(
+    return const Text(
       'Welcome to the Denso Homepage\nname of client',
       textAlign: TextAlign.left,
       style: TextStyle(
@@ -81,58 +83,61 @@ class _HomePageState extends State<HomePage> {
             //insert the carouself here
             CarouselSlider(
               items: dataList.map((item) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    //color: Theme.of(context).primaryColor,
-                    color: Colors.red[400],
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Stack(
-                        children: <Widget>[
-                          Center(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Image.asset(
-                                item.imageName,
-                                fit: BoxFit.cover,
-                                height: 180,
-                                width: MediaQuery.of(context).size.width,
+                return Hero(
+                  tag: 'image_${item.imageName}',
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      //color: Theme.of(context).primaryColor,
+                      color: Colors.red[400],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Stack(
+                          children: <Widget>[
+                            Center(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(
+                                  item.imageName,
+                                  fit: BoxFit.cover,
+                                  height: 180,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.title,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.title,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                item.description,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
+                                Text(
+                                  item.description,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               }).toList(),
