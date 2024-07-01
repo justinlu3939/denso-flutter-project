@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 //import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:my_app/components/data.dart';
+import 'dart:ui' as ui;
 
 //might potentially use this dependency
 //import 'package:flutter_svg/flutter_svg.dart';
@@ -26,15 +27,31 @@ class LandingPage extends StatelessWidget {
 
 class WelcomeText extends StatelessWidget {
   const WelcomeText({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const Text(
+    // final primaryColor = Theme.of(context).primaryColor;
+    // final inverseColor = primaryColor.computeLuminance() > 0.5
+    //     ? Colors.white
+    //     : Colors.black;
+
+    return Text(
       'Welcome to the Denso Homepage\nname of client',
       textAlign: TextAlign.left,
       style: TextStyle(
         fontSize: 20,
         //fontWeight: FontWeight.bold
         //fontStyle: FontStyle.italic,
+        fontFamily: 'Charter BT',
+      //   foreground: Paint()
+      // ..shader = ui.Gradient.linear(
+      //   const Offset(0, 20),
+      //   const Offset(150, 20),
+      //   <Color>[
+      //     Colors.red,
+      //     primaryColor,
+      //   ],
+      // )
       ),
     );
   }
@@ -82,7 +99,8 @@ class _HomePageState extends State<HomePage> {
                               child: Image.asset(
                                 item.imageName,
                                 fit: BoxFit.cover,
-                                height: 190,
+                                height: 180,
+                                width: MediaQuery.of(context).size.width,
                               ),
                             ),
                           ),
