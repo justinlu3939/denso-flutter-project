@@ -42,7 +42,7 @@ class ScrollView extends StatelessWidget {
             "Profile",
             style: TextStyle(
               fontSize: 20,
-              fontFamily: 'Times New Roman',
+              fontFamily: 'Arial',
             ),
           ),
           onTap: () {},
@@ -54,7 +54,7 @@ class ScrollView extends StatelessWidget {
             "Dark Mode",
             style: TextStyle(
               fontSize: 20,
-              fontFamily: 'Times New Roman',
+              fontFamily: 'Arial',
             ),
           ),
           onTap: () {
@@ -68,7 +68,7 @@ class ScrollView extends StatelessWidget {
             "Favorites",
             style: TextStyle(
               fontSize: 20,
-              fontFamily: 'Times New Roman',
+              fontFamily: 'Arial',
             ),
           ),
           onTap: () {},
@@ -80,7 +80,7 @@ class ScrollView extends StatelessWidget {
             "Notifications",
             style: TextStyle(
               fontSize: 20,
-              fontFamily: 'Times New Roman',
+              fontFamily: 'Arial',
             ),
           ),
           onTap: () {},

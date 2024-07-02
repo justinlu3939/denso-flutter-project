@@ -16,6 +16,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final currentRoute = ModalRoute.of(context)?.settings.name;
     // final themeModel = Provider.of<ThemeModel>(context);
     //drawer is the code that creates the hamburger menu and sidebar itself
     return Drawer(
@@ -74,7 +75,14 @@ class Navbar extends StatelessWidget {
                   leading: Icon(Icons.home),
                   title: Text('Home page'),
                   onTap: () {
-                    Navigator.pushNamed(context, '/landingpage');
+                    
+                    if (currentRoute == '/landingpage') {
+                      // If already on the home page, pop the current route
+                      Navigator.pop(context);
+                    } else {
+                      // Otherwise, navigate to the home page
+                      Navigator.pushNamed(context, '/landingpage');
+                    }
                   }
                 ),
                 ListTile(
@@ -82,7 +90,13 @@ class Navbar extends StatelessWidget {
                   leading: Icon(Icons.car_crash_outlined),
                   title: Text('Products and Services'),
                   onTap: () {
-                    Navigator.pushNamed(context, '/itemlist');
+                    if (currentRoute == '/itemlist') {
+                      // If already on the home page, pop the current route
+                      Navigator.pop(context);
+                    } else {
+                      // Otherwise, navigate to the home page
+                      Navigator.pushNamed(context, '/itemlist');
+                    }
                   },
                 ),
                 ListTile(

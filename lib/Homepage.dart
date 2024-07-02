@@ -44,7 +44,7 @@ class WelcomeText extends StatelessWidget {
         fontSize: 20,
         //fontWeight: FontWeight.bold
         //fontStyle: FontStyle.italic,
-        fontFamily: 'Charter BT',
+        fontFamily: 'Arial',
       //   foreground: Paint()
       // ..shader = ui.Gradient.linear(
       //   const Offset(0, 20),
