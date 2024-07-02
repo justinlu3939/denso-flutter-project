@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 //import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:my_app/components/data.dart';
+import 'package:my_app/hero_details.dart';
 
 //this import is for the gradient text
 //import 'dart:ui' as ui;
@@ -45,15 +46,15 @@ class WelcomeText extends StatelessWidget {
         //fontWeight: FontWeight.bold
         //fontStyle: FontStyle.italic,
         fontFamily: 'Arial',
-      //   foreground: Paint()
-      // ..shader = ui.Gradient.linear(
-      //   const Offset(0, 20),
-      //   const Offset(150, 20),
-      //   <Color>[
-      //     Colors.red,
-      //     primaryColor,
-      //   ],
-      // )
+        //   foreground: Paint()
+        // ..shader = ui.Gradient.linear(
+        //   const Offset(0, 20),
+        //   const Offset(150, 20),
+        //   <Color>[
+        //     Colors.red,
+        //     primaryColor,
+        //   ],
+        // )
       ),
     );
   }
@@ -83,60 +84,67 @@ class _HomePageState extends State<HomePage> {
             //insert the carouself here
             CarouselSlider(
               items: dataList.map((item) {
-                return Hero(
-                  tag: 'image_${item.imageName}',
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      //color: Theme.of(context).primaryColor,
-                      color: Colors.red[400],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      children: <Widget>[
-                        Stack(
-                          children: <Widget>[
-                            Center(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(
-                                  item.imageName,
-                                  fit: BoxFit.cover,
-                                  height: 180,
-                                  width: MediaQuery.of(context).size.width,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return HeroDetails(item: item);
+                    }));
+                  },
+                  child: Hero(
+                    tag: 'image_${item.imageName}',
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                        //color: Theme.of(context).primaryColor,
+                        color: Colors.red[400],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Stack(
+                            children: <Widget>[
+                              Center(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image.asset(
+                                    item.imageName,
+                                    fit: BoxFit.cover,
+                                    height: 180,
+                                    width: MediaQuery.of(context).size.width,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.title,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.title,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  item.description,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
+                                  Text(
+                                    item.description,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
