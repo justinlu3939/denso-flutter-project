@@ -64,15 +64,34 @@ class ScrollView extends StatelessWidget {
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/Wires.webp'),
+            leading: Image.asset('Images/ac.jpg'),
             title: const Text(
-              'Direct Ignition Coils and Wires',
+              'Electrical Components',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Times New Roman',
               ),
             ),
-            subtitle: const Text('Check out the ignition wires sets and direct ignition coils'),
+            subtitle: const Text('Check out the Alternatives, Relays and Starters'),
+            //tileColor: Colors.blue,
+            hoverColor: Colors.red,
+            focusColor: Colors.white,
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              //Navigator.pushNamed(context, routeName);
+            },
+          ),
+          ListTile(
+            contentPadding: const EdgeInsets.all(20),
+            leading: Image.asset('Images/ac.jpg'),
+            title: const Text(
+              'Engines',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Times New Roman',
+              ),
+            ),
+            subtitle: const Text('Check out the ignitors for engines here.'),
             //tileColor: Colors.blue,
             hoverColor: Colors.red,
             focusColor: Colors.white,
@@ -102,9 +121,47 @@ class ScrollView extends StatelessWidget {
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
+            leading: Image.asset('Images/ac.jpg'),
+            title: const Text(
+              'Fuel System',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Times New Roman',
+              ),
+            ),
+            subtitle: const Text('Check out the fuel system components and fuel pumps here.'),
+            //tileColor: Colors.blue,
+            hoverColor: Colors.red,
+            focusColor: Colors.white,
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              //Navigator.pushNamed(context, routeName);
+            },
+          ),
+          ListTile(
+            contentPadding: const EdgeInsets.all(20),
+            leading: Image.asset('Images/ac.jpg'),
+            title: const Text(
+              'Industrial Plugs',
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Times New Roman',
+              ),
+            ),
+            subtitle: const Text('Check out the industrial plugs DENSO has to offer here.'),
+            //tileColor: Colors.blue,
+            hoverColor: Colors.red,
+            focusColor: Colors.white,
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              //Navigator.pushNamed(context, routeName);
+            },
+          ),
+          ListTile(
+            contentPadding: const EdgeInsets.all(20),
             leading: Image.asset('Images/sensors.webp'),
             title: const Text(
-              'Oxygen & A/F Sensors',
+              'Sensors',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Times New Roman',
@@ -121,34 +178,15 @@ class ScrollView extends StatelessWidget {
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/sparkplug.webp'),
+            leading: Image.asset('Images/ac.jpg'),
             title: const Text(
-              'Spark Plugs',
+              'Wiper Blades',
               style: TextStyle(
                 fontSize: 20,
                 fontFamily: 'Times New Roman',
               ),
             ),
-            subtitle: const Text('Browse spark plugs found in the OE-Type, TT and High Performance Series.'),
-            //tileColor: Colors.blue,
-            hoverColor: Colors.red,
-            focusColor: Colors.white,
-            trailing: const Icon(Icons.arrow_forward_ios),
-            onTap: () {
-              //Navigator.pushNamed(context, routeName);
-            },
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/rotator.webp'),
-            title: const Text(
-              'Rotating Electrical',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Times New Roman',
-              ),
-            ),
-            subtitle: const Text('Check out the starters and rotators.'),
+            subtitle: const Text('Check out the wiper bladess here.'),
             //tileColor: Colors.blue,
             hoverColor: Colors.red,
             focusColor: Colors.white,
