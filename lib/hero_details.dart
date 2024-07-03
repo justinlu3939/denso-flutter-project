@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/data.dart';
+import 'package:my_app/components/newsdata.dart';
 
 class HeroDetails extends StatelessWidget{
   final DataModel item;
@@ -20,7 +20,7 @@ class HeroDetails extends StatelessWidget{
             width: MediaQuery.of(context).size.width,
             height: 400,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Text(item.description),
           ],
         ),

@@ -121,25 +121,6 @@ class ScrollView extends StatelessWidget {
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/othersensors.jpg'),
-            title: const Text(
-              'Other Sensors',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Times New Roman',
-              ),
-            ),
-            subtitle: const Text('Check out the Cam/Crank sensors, TPMS sensors, mass air flow sensors and more.'),
-            //tileColor: Colors.blue,
-            hoverColor: Colors.red,
-            focusColor: Colors.white,
-            trailing: const Icon(Icons.arrow_forward_ios),
-            onTap: () {
-              //Navigator.pushNamed(context, routeName);
-            },
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.all(20),
             leading: Image.asset('Images/sparkplug.webp'),
             title: const Text(
               'Spark Plugs',

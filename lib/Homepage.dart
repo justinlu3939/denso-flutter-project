@@ -3,7 +3,7 @@ import 'package:my_app/navbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 //import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:my_app/components/data.dart';
+import 'package:my_app/components/newsdata.dart';
 import 'package:my_app/hero_details.dart';
 
 //this import is for the gradient text
@@ -173,6 +173,11 @@ class _HomePageState extends State<HomePage> {
                 spacing: 20,
               ),
             ),
+
+            const SizedBox(height: 20,),
+            
+            //add the next widgets here.
+            
           ],
         ),
       ),
