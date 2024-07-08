@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:my_app/WebViewContainer.dart';
 import 'package:my_app/navbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -69,6 +72,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int activeIndex = 0;
+  List<Image> imageList = [
+    Image.asset('Images/autopart.png',),
+    Image.asset('Images/core.png'),
+    Image.asset('Images/product.png'),
+    Image.asset('Images/news.jpeg'),
+  ];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -177,32 +186,40 @@ class _HomePageState extends State<HomePage> {
 
             const SizedBox(height: 20,),
             
+            const Text('Helpful Links: ',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+                fontSize: 20,
+                fontFamily: 'Arial',
+              ),
+            ),
+
             //add the next widgets here.
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(25),
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12),
                 itemCount: 4,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (_, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      //color: Colors.red,
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/webviewcontainer',
+                          arguments: 'website$index');
+                      print((index));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        //color: Colors.red,
+                      ),
+                      child: imageList[index],
                     ),
-                    child: Image.asset('Images/mkey.jpeg',),
                   );
                 },
               ),
             ),
-            
-            //an idea is to add list tiles or cards that take users to specific denso websites
-            //https://www.denso.com/global/en/news/newsroom/
-            //https://www.densoautoparts.com
-            //https://www.densoproducts.com
-            //https://www.denso.com/global/en/about-us/corporate-info/profile/
-            
           ],
         ),
       ),

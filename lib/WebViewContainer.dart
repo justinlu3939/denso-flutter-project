@@ -23,9 +23,16 @@ class WebPage extends State<WebViewContainer> {
     final String url;
     if (widget.keyword == 'About') {
       url = 'https://www.denso.com/global/en/about-us/at-a-glance/';
-    } else if (widget.keyword == 'keyword2') {
-      url = 'https://www.website2.com';
-    } else {
+    } else if (widget.keyword == 'website0') {
+      url = 'https://www.densoautoparts.com';
+    } else if(widget.keyword == 'website1') {
+      url = 'https://www.denso.com/global/en/about-us/corporate-info/profile/';
+    } else if(widget.keyword == 'website2') {
+      url = 'https://www.densoproducts.com';
+    } else if(widget.keyword == 'website3') {
+      url = 'https://www.denso.com/global/en/news/newsroom/';
+    }
+    else {
       url = 'https://www.densoautoparts.com/';
     }
 
@@ -35,7 +42,12 @@ class WebPage extends State<WebViewContainer> {
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text("DENSO Overview"),
+        title: Text(
+          widget.keyword == 'website0' ? 'DENSO Auto Parts' : 
+          widget.keyword == 'website2' ? 'DENSO Products' : 
+          widget.keyword == 'website3' ? 'DENSO Newsroom' :
+          'DENSO overview'
+        ),
         centerTitle: true,
       ),
       // body: WebViewWidget(controller: controller),
