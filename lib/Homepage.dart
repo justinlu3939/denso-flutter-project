@@ -133,12 +133,13 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   Text(
-                                    item.description,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
+                                  item.description,
+                                  overflow: TextOverflow.fade,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
                                   ),
+                                                                    ),
                                 ],
                               ),
                             ),
@@ -177,7 +178,24 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 20,),
             
             //add the next widgets here.
-            
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12),
+                itemCount: 4,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (_, index) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      //color: Colors.red,
+                    ),
+                    child: Image.asset('Images/mkey.jpeg',),
+                  );
+                },
+              ),
+            ),
             
             //an idea is to add list tiles or cards that take users to specific denso websites
             //https://www.denso.com/global/en/news/newsroom/
