@@ -178,6 +178,13 @@ class _HomePageState extends State<HomePage> {
             
             //add the next widgets here.
             
+            
+            //an idea is to add list tiles or cards that take users to specific denso websites
+            //https://www.denso.com/global/en/news/newsroom/
+            //https://www.densoautoparts.com
+            //https://www.densoproducts.com
+            //https://www.denso.com/global/en/about-us/corporate-info/profile/
+            
           ],
         ),
       ),
