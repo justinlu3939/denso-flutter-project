@@ -31,6 +31,10 @@ class WebPage extends State<WebViewContainer> {
       url = 'https://www.densoproducts.com';
     } else if(widget.keyword == 'website3') {
       url = 'https://www.denso.com/global/en/news/newsroom/';
+    } else if(widget.keyword == 'heavyproduct') {
+      url = 'https://www.densoheavyduty.com';
+    } else if(widget.keyword == 'allproduct') {
+      url = 'https://www.densoautoparts.com/all-denso-auto-parts/';
     }
     else {
       url = 'https://www.densoautoparts.com/';
