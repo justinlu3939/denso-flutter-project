@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage> {
 
             //add the next widgets here.
             Padding(
-              padding: const EdgeInsets.all(25),
+              padding: const EdgeInsets.all(15),
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12),
                 itemCount: 4,
@@ -209,12 +209,14 @@ class _HomePageState extends State<HomePage> {
                           arguments: 'website$index');
                       print((index));
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        //color: Colors.red,
+                    child: Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          // color: Colors.red,
+                        ),
+                        child: imageList[index],
                       ),
-                      child: imageList[index],
                     ),
                   );
                 },

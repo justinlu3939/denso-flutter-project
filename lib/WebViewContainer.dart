@@ -35,6 +35,8 @@ class WebPage extends State<WebViewContainer> {
       url = 'https://www.densoheavyduty.com';
     } else if(widget.keyword == 'allproduct') {
       url = 'https://www.densoautoparts.com/all-denso-auto-parts/';
+    } else if(widget.keyword == 'engine') {
+      url = 'https://www.densoproducts.com/engine-denso';
     }
     else {
       url = 'https://www.densoautoparts.com/';
@@ -50,6 +52,9 @@ class WebPage extends State<WebViewContainer> {
           widget.keyword == 'website0' ? 'DENSO Auto Parts' : 
           widget.keyword == 'website2' ? 'DENSO Products' : 
           widget.keyword == 'website3' ? 'DENSO Newsroom' :
+          widget.keyword == 'heavyproduct' ? 'DENSO Heavy Products' :
+          widget.keyword == 'allproduct' ? 'DENSO All Products' :
+          widget.keyword == 'engine' ? "DENSO Engines" :
           'DENSO overview'
         ),
         centerTitle: true,
