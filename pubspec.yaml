@@ -40,9 +40,16 @@ dependencies:
   animated_splash_screen: ^1.3.0
   carousel_slider: ^4.2.1
   page_transition: ^2.1.0
-  # firebase_core: ^3.1.0
+  
+  # added in the firebase
+  firebase_core: ^3.2.0
+  firebase_auth: ^5.1.2
+
+  fluttertoast: ^8.2.6
+  google_fonts: 5.1.0
   flutter_svg: ^2.0.10+1
   smooth_page_indicator: ^1.1.0
+  cloud_firestore: ^5.1.0
 
 dev_dependencies:
   flutter_test:

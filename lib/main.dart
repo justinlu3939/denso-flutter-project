@@ -1,10 +1,12 @@
 // ignore_for_file: use_super_parameters, prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/ItemList.dart';
-import 'package:my_app/Homepage.dart';
-import 'package:my_app/login.dart';
-import 'package:my_app/settings.dart';
+import 'package:my_app/pages/ItemList.dart';
+import 'package:my_app/pages/Homepage.dart';
+import 'package:my_app/pages/forgotpw.dart';
+import 'package:my_app/pages/login.dart';
+import 'package:my_app/pages/settings.dart';
 import 'package:provider/provider.dart';
 //import 'package:webview_flutter/webview_flutter.dart';
 import 'package:my_app/WebViewContainer.dart';
@@ -14,7 +16,17 @@ import 'package:my_app/WebViewContainer.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
-void main() {
+//firebase imports
+import 'package:firebase_core/firebase_core.dart';
+import 'package:my_app/firebase_options.dart';
+
+import 'package:my_app/pages/signup.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
   runApp(MyApp()); //original run statement
 }
 
@@ -48,8 +60,44 @@ class SplashScreen extends StatelessWidget{
   }
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  //since it was changed to a stateful widget, we won't need the key
+  //MyApp({Key? key}) : super(key: key);
+
+  //this firebase auth code below is a beta implementation for remember me
+  var auth = FirebaseAuth.instance;
+  var isLogin = false;
+
+  checkiflogin () async {
+    auth.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User signed out');
+        setState(() {
+          isLogin = false;
+        });
+      } else {
+        print('User signed in');
+        setState(() {
+          isLogin = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    checkiflogin();
+    super.initState();
+  }
+  //it ends here. if you need to remove this feature. Delete this code and change the MyApp back to Stateless
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +112,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),
             themeMode: themeModel.themeMode,
-            //home: LoginPage(),
-            home: const SplashScreen(),
+            home: SplashScreen(),
             routes: {
               '/landingpage': (context) => const LandingPage(),
               '/itemlist': (context) => const MyItemList(title: 'DENSO'),
@@ -74,6 +121,8 @@ class MyApp extends StatelessWidget {
                       ModalRoute.of(context)?.settings.arguments as String),
               '/settings': (context) => const Settings(),
               '/signout': (context) => LoginPage(),
+              '/signup': (context) => Signup(),
+              '/forgetpw': (context) => Forgetpw(),
             },
           );
         },

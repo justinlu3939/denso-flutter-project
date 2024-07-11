@@ -13,10 +13,6 @@ class WebViewContainer extends StatefulWidget {
 }
 
 class WebPage extends State<WebViewContainer> {
-  // var controller = WebViewController();
-  // ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  // ..loadRequest(
-  //     Uri.parse('https://www.denso.com/global/en/about-us/at-a-glance/'));
   late WebViewController controller;
   @override
   Widget build(BuildContext context) {
@@ -37,6 +33,14 @@ class WebPage extends State<WebViewContainer> {
       url = 'https://www.densoautoparts.com/all-denso-auto-parts/';
     } else if(widget.keyword == 'engine') {
       url = 'https://www.densoproducts.com/engine-denso';
+    } else if(widget.keyword == 'Cherry') {
+      url = 'https://www.denso.com/global/en/news/newsroom/2024/20240513-g01/';
+    } else if(widget.keyword == 'NTT') {
+      url = 'https://www.denso.com/global/en/news/newsroom/2024/20240613-g01/';
+    } else if(widget.keyword == 'MobiQ') {
+      url = 'https://www.prnewswire.com/news-releases/denso-announces-mobiq-for-the-automotive-aftermarket-302123503.html';
+    } else if(widget.keyword == '50') {
+      url = 'https://www.densorobotics.com/denso-celebrates-50yrs-america/';
     }
     else {
       url = 'https://www.densoautoparts.com/';
@@ -51,7 +55,7 @@ class WebPage extends State<WebViewContainer> {
         title: Text(
           widget.keyword == 'website0' ? 'DENSO Auto Parts' : 
           widget.keyword == 'website2' ? 'DENSO Products' : 
-          widget.keyword == 'website3' ? 'DENSO Newsroom' :
+          widget.keyword == ('website3') ? 'DENSO Newsroom' :
           widget.keyword == 'heavyproduct' ? 'DENSO Heavy Products' :
           widget.keyword == 'allproduct' ? 'DENSO All Products' :
           widget.keyword == 'engine' ? "DENSO Engines" :

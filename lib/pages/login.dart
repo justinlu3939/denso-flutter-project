@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_app/components/my_button.dart';
 import 'package:my_app/components/my_textfield.dart';
 import 'package:my_app/components/square_tile.dart';
+import 'package:my_app/auth.dart';
+//import 'package:flutter/gestures.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -12,14 +14,15 @@ class LoginPage extends StatelessWidget {
 
   // sign user in method
   //void signUserIn() {}
-  void signUserIn(BuildContext context) {
-    Navigator.pushNamed(context, '/landingpage');
-  }
+  // void signUserIn(BuildContext context) {
+  //   Navigator.pushNamed(context, '/landingpage');
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      //backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
@@ -78,9 +81,14 @@ class LoginPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.grey[600]),
+                      InkWell(
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                        onTap: () async {
+                          Navigator.pushNamed(context, '/forgetpw');
+                        },
                       ),
                     ],
                   ),
@@ -93,7 +101,13 @@ class LoginPage extends StatelessWidget {
                 //   onTap: signUserIn,
                 // ),
                 MyButton(
-                  onTap: () => signUserIn(context),
+                  onTap: () async {
+                    await Auth().signin(
+                      email: usernameController.text, 
+                      password: passwordController.text, 
+                      context: context
+                    );
+                  }, 
                 ),
 
                 const SizedBox(height: 20),
@@ -153,13 +167,21 @@ class LoginPage extends StatelessWidget {
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     const SizedBox(width: 4),
-                    const Text(
-                      'Register now',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                    InkWell(
+                      onTap: () async {
+                        Navigator.pushNamed(context, '/signup');
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        child: const Text(
+                          'Register now',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                    ),
+                    )
                   ],
                 )
               ],

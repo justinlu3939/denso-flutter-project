@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 //this is the import that will allow for webpage viewing
 import 'package:webview_flutter/webview_flutter.dart';
 
+import 'package:my_app/auth.dart';
+
 //this code is for creating the side bar for the app.
 class Navbar extends StatelessWidget {
   @override
@@ -117,8 +119,8 @@ class Navbar extends StatelessWidget {
             child: ListTile(
               leading: Icon(Icons.power_settings_new),
               title: Text("Log out"),
-              onTap: () {
-                Navigator.pushNamed(context, '/signout');
+              onTap: () async {
+                await Auth().signout(context: context);
               },
             ),
           ),
