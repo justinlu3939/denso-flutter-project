@@ -13,12 +13,15 @@ import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:my_app/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 //this code is for creating the side bar for the app.
 class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentRoute = ModalRoute.of(context)?.settings.name;
+    var currentUser = FirebaseAuth.instance.currentUser;
+    String? displayPhoto = currentUser?.photoURL;
     // final themeModel = Provider.of<ThemeModel>(context);
     //drawer is the code that creates the hamburger menu and sidebar itself
     return Drawer(
@@ -45,8 +48,8 @@ class Navbar extends StatelessWidget {
                   //here is the link for denso image: https://www.econdev.dublinohiousa.gov/2020/wp-content/uploads/2019/08/denso-big.png
                   currentAccountPicture: CircleAvatar(
                     child: ClipOval(
-                      child: Image.asset(
-                        'Images/mkey.jpeg',
+                      child: Image.network(
+                        displayPhoto ?? 'https://picsum.photos/id/12/2500/1667',
                         width: 90,
                         height: 90,
                         fit: BoxFit.cover,
