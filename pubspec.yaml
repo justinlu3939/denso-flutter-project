@@ -44,6 +44,8 @@ dependencies:
   # added in the firebase
   firebase_core: ^3.2.0
   firebase_auth: ^5.1.2
+  sign_in_with_apple: ^6.1.1
+  google_sign_in: ^6.2.1
 
   fluttertoast: ^8.2.6
   google_fonts: 5.1.0

@@ -45,7 +45,7 @@ class ScrollView extends StatelessWidget {
         children: [
           ListTile(
             contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/AC-Compressor-web.webp'),
+            leading: Image.asset('Images/AC-Compressor-web.webp', width: 90, height: 90,),
             title: const Text(
               'A/C & Engine Cooling',
               style: TextStyle(
@@ -59,12 +59,13 @@ class ScrollView extends StatelessWidget {
             focusColor: Colors.white,
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              //Navigator.pushNamed(context, routeName);
+              Navigator.pushNamed(context, '/webviewcontainer',
+                                  arguments: 'AC');
             },
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/Wires.webp'),
+            leading: Image.asset('Images/Wires.webp', width: 90, height: 90,),
             title: const Text(
               'Electrical Components',
               style: TextStyle(
@@ -78,12 +79,13 @@ class ScrollView extends StatelessWidget {
             focusColor: Colors.white,
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              //Navigator.pushNamed(context, routeName);
+              Navigator.pushNamed(context, '/webviewcontainer',
+                                  arguments: 'ecomp');
             },
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/ignition.webp'),
+            leading: Image.asset('Images/ignition.webp', width: 90, height: 90,),
             title: const Text(
               'Engines',
               style: TextStyle(
@@ -103,7 +105,7 @@ class ScrollView extends StatelessWidget {
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/airfilter.webp'),
+            leading: Image.asset('Images/airfilter.webp', width: 90, height: 90,),
             title: const Text(
               'Filters',
               style: TextStyle(
@@ -117,12 +119,13 @@ class ScrollView extends StatelessWidget {
             focusColor: Colors.white,
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              //Navigator.pushNamed(context, routeName);
+              //this is gonna connect to the demo page instead. no webview
+              Navigator.pushNamed(context, '/demoPage');
             },
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/fuelsystem.webp'),
+            leading: Image.asset('Images/fuelsystem.webp', width: 90, height: 90,),
             title: const Text(
               'Fuel System',
               style: TextStyle(
@@ -136,7 +139,8 @@ class ScrollView extends StatelessWidget {
             focusColor: Colors.white,
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              //Navigator.pushNamed(context, routeName);
+              Navigator.pushNamed(context, '/webviewcontainer',
+                                  arguments: 'fuel');
             },
           ),
           ListTile(
@@ -155,7 +159,8 @@ class ScrollView extends StatelessWidget {
             focusColor: Colors.white,
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              //Navigator.pushNamed(context, routeName);
+              Navigator.pushNamed(context, '/webviewcontainer',
+                                  arguments: 'plug');
             },
           ),
           ListTile(
@@ -174,7 +179,8 @@ class ScrollView extends StatelessWidget {
             focusColor: Colors.white,
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              //Navigator.pushNamed(context, routeName);
+              Navigator.pushNamed(context, '/webviewcontainer',
+                                  arguments: 'sensor');
             },
           ),
           ListTile(
@@ -193,7 +199,8 @@ class ScrollView extends StatelessWidget {
             focusColor: Colors.white,
             trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
-              //Navigator.pushNamed(context, routeName);
+              Navigator.pushNamed(context, '/webviewcontainer',
+                                  arguments: 'wiper');
             },
           ),
           ListTile(

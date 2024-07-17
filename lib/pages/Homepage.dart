@@ -8,6 +8,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 //import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:my_app/components/newsdata.dart';
 import 'package:my_app/hero_details.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 //this import is for the gradient text
 //import 'dart:ui' as ui;
@@ -40,11 +41,13 @@ class WelcomeText extends StatelessWidget {
     // final inverseColor = primaryColor.computeLuminance() > 0.5
     //     ? Colors.white
     //     : Colors.black;
+    var currentUser = FirebaseAuth.instance.currentUser;
+    String? displayName = currentUser?.displayName;
 
-    return const Text(
-      'Welcome to the Denso Homepage\nname of client',
+    return Text(
+      'Welcome to the Denso Homepage\n${displayName ?? 'Guest'}',
       textAlign: TextAlign.left,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 20,
         //fontWeight: FontWeight.bold
         //fontStyle: FontStyle.italic,

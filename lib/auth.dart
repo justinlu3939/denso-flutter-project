@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 //in the signup page, make sure you have under the ontap async button: await Auth().signup(email: _emailcontroller.text, password: _passwordcontroller.text)
 
@@ -36,9 +38,6 @@ class Auth {
           fontSize: 14,
         );
     }
-    // catch (e) {
-      
-    // }
   }
 
   Future<void> signin({
@@ -84,6 +83,23 @@ class Auth {
     await Future.delayed(const Duration(seconds: 1));
     Navigator.pushNamed(context, '/signout');
   }
+
+// Future<UserCredential> signInWithApple() async {
+//   final appleProvider = AppleAuthProvider();
+
+//   try {
+//     UserCredential userCredential = await FirebaseAuth.instance.signInWithPopup(appleProvider);
+//     // Keep the authorization code returned from Apple platforms
+//     String? authCode = userCredential.additionalUserInfo?.authorizationCode;
+//     // Revoke Apple auth token
+//     await FirebaseAuth.instance.revokeTokenWithAuthorizationCode(authCode!);
+
+//     return userCredential; // Explicitly return the user credential
+//   } catch (error) {
+//     print('Error: $error');
+//     rethrow; // Rethrow the error
+//   }
+// }
 
   Future<void> sendPasswordResetLink(String email, BuildContext context) async{
     try {

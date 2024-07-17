@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/pages/ItemList.dart';
 import 'package:my_app/pages/Homepage.dart';
+import 'package:my_app/pages/demoPageForFilterItem.dart';
 import 'package:my_app/pages/forgotpw.dart';
 import 'package:my_app/pages/login.dart';
 import 'package:my_app/pages/settings.dart';
@@ -49,6 +50,7 @@ class ThemeModel extends ChangeNotifier {
 
 class SplashScreen extends StatelessWidget{
   const SplashScreen ({super.key});
+  // final bool signedIn = isLogin; //if i want to do persistent signin, this is the first step
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
@@ -77,6 +79,7 @@ class _MyAppState extends State<MyApp> {
   var isLogin = false;
 
   checkiflogin () async {
+    //User? user = await auth.authStateChanges().first; //if change to statelesswidget, replace bottom line with this
     auth.authStateChanges().listen((User? user) {
       if (user == null) {
         print('User signed out');
@@ -88,6 +91,7 @@ class _MyAppState extends State<MyApp> {
         setState(() {
           isLogin = true;
         });
+        //Navigator.pushNamed(context, '/landingpage'); //doesn't work
       }
     });
   }
@@ -123,6 +127,7 @@ class _MyAppState extends State<MyApp> {
               '/signout': (context) => LoginPage(),
               '/signup': (context) => Signup(),
               '/forgetpw': (context) => Forgetpw(),
+              '/demoPage': (context) => demoPage(),
             },
           );
         },

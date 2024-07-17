@@ -41,6 +41,26 @@ class WebPage extends State<WebViewContainer> {
       url = 'https://www.prnewswire.com/news-releases/denso-announces-mobiq-for-the-automotive-aftermarket-302123503.html';
     } else if(widget.keyword == '50') {
       url = 'https://www.densorobotics.com/denso-celebrates-50yrs-america/';
+    } else if(widget.keyword == 'AC') {
+      url = 'https://www.densoproducts.com/air-conditioning-denso';
+    } else if(widget.keyword == 'ecomp') {
+      url = 'https://www.densoproducts.com/electrical-denso';
+    } else if(widget.keyword == 'fuel') {
+      url = 'https://www.densoproducts.com/fuel-system-denso';
+    }else if(widget.keyword == 'plug') {
+      url = 'https://www.densoproducts.com/industrial-plugs-denso';
+    } else if(widget.keyword == 'sensor') {
+      url = 'https://www.densoproducts.com/sensors-denso';
+    } else if(widget.keyword == 'wiper') {
+      url = 'https://www.densoproducts.com/wiper-blades-denso';
+    } else if(widget.keyword == 'filter') {
+      url = 'https://www.densoproducts.com/filters-denso';
+    } else if(widget.keyword == 'airfilter') {
+      url = 'https://www.densoproducts.com/air-filters-denso';
+    } else if(widget.keyword == 'cabinfilter') {
+      url = 'https://www.densoproducts.com/cabin-air-filters-denso';
+    } else if(widget.keyword == 'oilfilter') {
+      url = 'https://www.densoproducts.com/oil-filters-denso';
     }
     else {
       url = 'https://www.densoautoparts.com/';

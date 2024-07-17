@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:my_app/auth_serviceGoogle.dart';
 import 'package:my_app/components/my_button.dart';
 import 'package:my_app/components/my_textfield.dart';
 import 'package:my_app/components/square_tile.dart';
 import 'package:my_app/auth.dart';
 //import 'package:flutter/gestures.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -29,14 +34,6 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //const SizedBox(height: 10),
-
-                //logo
-                // const Icon(
-                //   Icons.lock,
-                //   size: 100,
-                // ),
-
                 Image.asset(
                   'Images/Denso-Logo.png',
                   height: 250,
@@ -143,16 +140,22 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 //google + apple sign in buttons
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // google button
-                    SquareTile(imagePath: 'Images/google.png'),
+                    SquareTile(
+                      onTap: () => AuthServicegoogle(context).signInWithGoogle(),
+                      imagePath: 'Images/google.png'),
 
                     SizedBox(width: 25),
 
                     // apple button
-                    SquareTile(imagePath: 'Images/apple.png')
+                    SquareTile(
+                      onTap: () {
+                        
+                      },
+                      imagePath: 'Images/apple.png')
                   ],
                 ),
 

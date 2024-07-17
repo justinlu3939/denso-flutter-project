@@ -113,6 +113,12 @@ class Signup extends StatelessWidget {
           style: const TextStyle(color: Colors.black),
           decoration: InputDecoration(
             filled: true,
+            hintText: '******',
+            hintStyle: const TextStyle(
+              color: Color(0xff6A6A6A),
+              fontWeight: FontWeight.normal,
+              fontSize: 14
+            ),
             fillColor: const Color(0xffF7F7F9) ,
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
