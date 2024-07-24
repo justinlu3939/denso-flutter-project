@@ -8,6 +8,7 @@ class Signup extends StatelessWidget {
   Signup({super.key});
 
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -40,6 +41,8 @@ class Signup extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 80,),
+               _name(),
+               const SizedBox(height: 20,),
                _emailAddress(),
                const SizedBox(height: 20,),
                _password(),
@@ -75,6 +78,44 @@ class Signup extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             hintText: 'name@gmail.com',
+            hintStyle: const TextStyle(
+              color: Color(0xff6A6A6A),
+              fontWeight: FontWeight.normal,
+              fontSize: 14
+            ),
+            fillColor: const Color(0xffF7F7F9) ,
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(14)
+            )
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _name() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Name',
+          style: GoogleFonts.raleway(
+            textStyle: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.normal,
+              fontSize: 16
+            )
+          ),
+        ),
+        const SizedBox(height: 16,),
+        TextField(
+          controller: _nameController,
+          style: const TextStyle(color: Colors.black),
+          decoration: InputDecoration(
+            filled: true,
+            hintText: 'John Doe',
             hintStyle: const TextStyle(
               color: Color(0xff6A6A6A),
               fontWeight: FontWeight.normal,
@@ -144,6 +185,7 @@ class Signup extends StatelessWidget {
        await Auth().signup(
           email: _emailController.text,
           password: _passwordController.text,
+          name: _nameController.text,
           context: context
         );
       },

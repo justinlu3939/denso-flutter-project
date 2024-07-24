@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/WebViewContainer.dart';
 import 'package:my_app/navbar.dart';
@@ -42,6 +43,7 @@ class WelcomeText extends StatelessWidget {
     //     ? Colors.white
     //     : Colors.black;
     var currentUser = FirebaseAuth.instance.currentUser;
+    //String? userName = await FirebaseFirestore.instance.collection('documents').doc(currentUser.email).get();
     String? displayName = currentUser?.displayName;
 
     return Text(

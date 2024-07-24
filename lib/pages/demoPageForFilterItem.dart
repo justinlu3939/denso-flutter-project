@@ -57,6 +57,9 @@ class ScrollView extends StatelessWidget {
               Navigator.pushNamed(context, '/webviewcontainer',
                                   arguments: 'airfilter');
             },
+            onLongPress: () {
+              print('1');
+            },
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
@@ -77,6 +80,9 @@ class ScrollView extends StatelessWidget {
               Navigator.pushNamed(context, '/webviewcontainer',
                                   arguments: 'cabinfilter');
             },
+            onLongPress: () {
+              print('2');
+            },
           ),
           ListTile(
             contentPadding: const EdgeInsets.all(20),
@@ -96,6 +102,9 @@ class ScrollView extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, '/webviewcontainer',
                                   arguments: 'oilfilter');
+            },
+            onLongPress: () {
+              print('3');
             },
           ),
         ]

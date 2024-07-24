@@ -46,13 +46,18 @@ class Navbar extends StatelessWidget {
                     color: Colors.black,
                   ),),
                   //here is the link for denso image: https://www.econdev.dublinohiousa.gov/2020/wp-content/uploads/2019/08/denso-big.png
-                  currentAccountPicture: CircleAvatar(
-                    child: ClipOval(
-                      child: Image.network(
-                        displayPhoto ?? 'https://picsum.photos/id/12/2500/1667',
-                        width: 90,
-                        height: 90,
-                        fit: BoxFit.cover,
+                  currentAccountPicture: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/profile');
+                    },
+                    child: CircleAvatar(
+                      child: ClipOval(
+                        child: Image.network(
+                          displayPhoto ?? 'https://picsum.photos/id/12/2500/1667',
+                          width: 90,
+                          height: 90,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),

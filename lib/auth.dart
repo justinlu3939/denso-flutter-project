@@ -1,17 +1,22 @@
 // import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:my_app/user_model.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:dartz/dartz.dart';
+
 
 //in the signup page, make sure you have under the ontap async button: await Auth().signup(email: _emailcontroller.text, password: _passwordcontroller.text)
 
 class Auth {
   Future<void> signup ({
+    required String name,
     required String email,
     required String password,
     required BuildContext context,
@@ -19,6 +24,13 @@ class Auth {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
       await Future.delayed(const Duration(seconds: 1));
+      final user = UserModel(name: name, email: email, password: password);
+      // Create Firestore entry - the user id is user.email
+      await FirebaseFirestore.instance.collection('documents').doc(user.email).set({
+        'name': user.name,
+        'email': user.email,
+        'password': user.password,
+      });
       Navigator.pushNamed(context, '/landingpage');
     } 
     on FirebaseAuthException catch(e) {
@@ -84,22 +96,66 @@ class Auth {
     Navigator.pushNamed(context, '/signout');
   }
 
+  Future<User?> signinApple() async {
+    try {
+      final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          ]
+      );
+      final OAuthCredential = OAuthProvider("apple.com").credential(
+        idToken: credential.identityToken,
+        accessToken: credential.authorizationCode,
+      );
+      final UserCredential = await FirebaseAuth.instance.signInWithCredential(OAuthCredential);
+      final user = UserCredential.user;
+      if(user == null)
+      {
+        throw const Failure(code: "user-credential-null", message: "error");
+      }
+      return user;
+    } on SignInWithAppleAuthorizationException catch (e) {
+      switch (e.code) {
+        case AuthorizationErrorCode.canceled:
+          return null;
+        case AuthorizationErrorCode.failed:
+          throw Failure(code: 'sign-in-error', message: 'error: $e');
+        case AuthorizationErrorCode.invalidResponse:
+          throw Failure(code: 'sign-in-error', message: 'error: $e');
+        case AuthorizationErrorCode.notHandled:
+          throw Failure(code: 'sign-in-error', message: 'error: $e');
+        case AuthorizationErrorCode.notInteractive:
+          throw Failure(code: 'sign-in-error', message: 'error: $e');
+        case AuthorizationErrorCode.unknown:
+          throw Failure(code: 'sign-in-error', message: 'error: $e');
+      }
+    } catch (e) {
+      throw const Failure(code: '', message: 'Error has occured.');
+    }
+  }
+
+  Future <Either<Failure, User?>> signInWithApple() async {
+    try {
+      final user = await signinApple();
+      return Right(user);
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
 // Future<UserCredential> signInWithApple() async {
-//   final appleProvider = AppleAuthProvider();
-
-//   try {
-//     UserCredential userCredential = await FirebaseAuth.instance.signInWithPopup(appleProvider);
-//     // Keep the authorization code returned from Apple platforms
-//     String? authCode = userCredential.additionalUserInfo?.authorizationCode;
-//     // Revoke Apple auth token
-//     await FirebaseAuth.instance.revokeTokenWithAuthorizationCode(authCode!);
-
-//     return userCredential; // Explicitly return the user credential
-//   } catch (error) {
-//     print('Error: $error');
-//     rethrow; // Rethrow the error
+//     final appleProvider = AppleAuthProvider(); 
+//     return await FirebaseAuth.instance.signInWithProvider(appleProvider);
 //   }
-// }
+//   Future<UserCredential> handleAppleSignIn() async {
+//     var auth = await signInWithApple();
+//     if(auth.user!=null)
+//     {
+//       String? displayName = "apple_user";
+//       String? email = "apple@apple.com";
+//     }
+//   }
+
 
   Future<void> sendPasswordResetLink(String email, BuildContext context) async{
     try {
@@ -135,3 +191,10 @@ class Auth {
     }
   }
 }
+
+class Failure implements Exception{
+    final String code;
+    final String message;
+
+    const Failure({required this.code, required this.message});
+  }

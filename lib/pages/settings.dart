@@ -45,7 +45,9 @@ class ScrollView extends StatelessWidget {
               fontFamily: 'Arial',
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, '/profile');
+          },
         ),
         ListTile(
           contentPadding: const EdgeInsets.all(20),
@@ -71,7 +73,9 @@ class ScrollView extends StatelessWidget {
               fontFamily: 'Arial',
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, '/favorite');
+          },
         ),
         ListTile(
           contentPadding: const EdgeInsets.all(20),

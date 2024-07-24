@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:my_app/pages/ItemList.dart';
 import 'package:my_app/pages/Homepage.dart';
 import 'package:my_app/pages/demoPageForFilterItem.dart';
+import 'package:my_app/pages/favorites.dart';
 import 'package:my_app/pages/forgotpw.dart';
 import 'package:my_app/pages/login.dart';
+import 'package:my_app/pages/profile.dart';
 import 'package:my_app/pages/settings.dart';
 import 'package:provider/provider.dart';
 //import 'package:webview_flutter/webview_flutter.dart';
@@ -78,6 +80,8 @@ class _MyAppState extends State<MyApp> {
   var auth = FirebaseAuth.instance;
   var isLogin = false;
 
+  bool get _isLogin => isLogin;
+
   checkiflogin () async {
     //User? user = await auth.authStateChanges().first; //if change to statelesswidget, replace bottom line with this
     auth.authStateChanges().listen((User? user) {
@@ -100,6 +104,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     checkiflogin();
     super.initState();
+    //print('result$_isLogin');
   }
   //it ends here. if you need to remove this feature. Delete this code and change the MyApp back to Stateless
 
@@ -128,6 +133,8 @@ class _MyAppState extends State<MyApp> {
               '/signup': (context) => Signup(),
               '/forgetpw': (context) => Forgetpw(),
               '/demoPage': (context) => demoPage(),
+              '/profile': (context) => Profile(),
+              '/favorite': (context) => Favorites(),
             },
           );
         },

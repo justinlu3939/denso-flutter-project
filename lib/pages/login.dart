@@ -10,6 +10,8 @@ import 'package:my_app/auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'package:flutter/foundation.dart';
+
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
@@ -151,8 +153,17 @@ class LoginPage extends StatelessWidget {
                     SizedBox(width: 25),
 
                     // apple button
+                    //it doesn't really work but at least the sign in shows
                     SquareTile(
-                      onTap: () {
+                      onTap: () async {
+                        final result = 
+                        await Auth().signinApple();
+
+                        if(result is Failure) {
+                          print(result);
+                        } else if(result is User) {
+                          Navigator.pushNamed(context, '/landingpage');
+                        }
                         
                       },
                       imagePath: 'Images/apple.png')
