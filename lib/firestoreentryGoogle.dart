@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-void checkForDoc() async { //change the void -> Future<String> if need to return
+void checkForDoc() async { 
   //get current user email (this is also the id for each entry)
   var currentUser = FirebaseAuth.instance.currentUser;
   String? currentEmail = currentUser?.email;
@@ -26,8 +26,8 @@ void checkForDoc() async { //change the void -> Future<String> if need to return
       // Create Firestore entry - the user id is user.email
       // this is for google
       await FirebaseFirestore.instance.collection('documents').doc('$currentEmail').set({
-        'name': currentUser?.displayName,
-        'email': currentEmail,
+        'name': currentUser?.displayName ?? 'unknown user',
+        'email': currentEmail ?? 'unknown email',
         //password cannot be read from google accounts. (this also includes apple)
       });
   }
