@@ -1,15 +1,11 @@
-import 'dart:ffi';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:my_app/WebViewContainer.dart';
+import 'package:my_app/firestoreget.dart';
 import 'package:my_app/navbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 //import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:my_app/components/newsdata.dart';
 import 'package:my_app/hero_details.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 //this import is for the gradient text
 //import 'dart:ui' as ui;
@@ -36,34 +32,64 @@ class LandingPage extends StatelessWidget {
 class WelcomeText extends StatelessWidget {
   const WelcomeText({super.key});
 
+  // Future<List<Map<String, dynamic>>> fetchUserData() async {
+  //   var currentUser = FirebaseAuth.instance.currentUser;
+  //   if (currentUser != null) {
+  //     var userDoc = await FirebaseFirestore.instance
+  //         .collection('documents')
+  //         .doc(currentUser.email)
+  //         .get();
+  //     if (userDoc.exists) {
+  //       return List<Map<String, dynamic>>.from(userDoc.data()!['userData']);
+  //     }
+  //   }
+  //   return [];
+  // }
+
   @override
   Widget build(BuildContext context) {
-    // final primaryColor = Theme.of(context).primaryColor;
-    // final inverseColor = primaryColor.computeLuminance() > 0.5
-    //     ? Colors.white
-    //     : Colors.black;
-    var currentUser = FirebaseAuth.instance.currentUser;
-    //String? userName = await FirebaseFirestore.instance.collection('documents').doc(currentUser.email).get();
-    String? displayName = currentUser?.displayName;
+    // var currentUser = FirebaseAuth.instance.currentUser;
+    // //String? userName = await FirebaseFirestore.instance.collection('documents').doc(currentUser.email).get();
+    // String? displayName = currentUser?.displayName;
+    // //change this displayName to List<Map<String, dynamic>>
 
-    return Text(
-      'Welcome to the Denso Homepage\n${displayName ?? 'Guest'}',
-      textAlign: TextAlign.left,
-      style: const TextStyle(
-        fontSize: 20,
-        //fontWeight: FontWeight.bold
-        //fontStyle: FontStyle.italic,
-        fontFamily: 'Arial',
-        //   foreground: Paint()
-        // ..shader = ui.Gradient.linear(
-        //   const Offset(0, 20),
-        //   const Offset(150, 20),
-        //   <Color>[
-        //     Colors.red,
-        //     primaryColor,
-        //   ],
-        // )
-      ),
+    // return Text(
+    //   'Welcome to the Denso Homepage\n${displayName ?? 'Guest'}',
+    //   textAlign: TextAlign.left,
+    //   style: const TextStyle(
+    //     fontSize: 20,
+    //     fontFamily: 'Arial',
+    //   ),
+    // );
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: getFromDoc(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          var userData = snapshot.data!.first;
+          String displayName = userData['name'] ?? 'Guest';
+          return Text(
+            'Welcome to the Denso Homepage\n$displayName',
+            textAlign: TextAlign.left,
+            style: const TextStyle(
+              fontSize: 20,
+              fontFamily: 'Arial',
+            ),
+          );
+        } else {
+          return const Text(
+            'Welcome to the Denso Homepage\nGuest',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: 20,
+              fontFamily: 'Arial',
+            ),
+          );
+        }
+      },
     );
   }
 }

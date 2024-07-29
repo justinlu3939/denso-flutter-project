@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/firestoreentry.dart';
 
 class AuthServicegoogle {
   final BuildContext context; // Add this line to store the context
@@ -22,6 +22,7 @@ class AuthServicegoogle {
     await FirebaseAuth.instance.signInWithCredential(credential);
 
     //print(FirebaseAuth.instance.currentUser?.displayName);
+    checkForDoc();
     Navigator.pushNamed(context, '/landingpage');
   }
 }

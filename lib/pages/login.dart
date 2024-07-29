@@ -7,10 +7,6 @@ import 'package:my_app/components/my_textfield.dart';
 import 'package:my_app/components/square_tile.dart';
 import 'package:my_app/auth.dart';
 //import 'package:flutter/gestures.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
-import 'package:flutter/foundation.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});

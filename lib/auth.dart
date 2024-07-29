@@ -1,18 +1,14 @@
 // import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:my_app/firestoreentry.dart';
 import 'package:my_app/user_model.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:dartz/dartz.dart';
-
-
-//in the signup page, make sure you have under the ontap async button: await Auth().signup(email: _emailcontroller.text, password: _passwordcontroller.text)
 
 class Auth {
   Future<void> signup ({
@@ -63,6 +59,7 @@ class Auth {
         password: password
       );
       // await Future.delayed(const Duration(seconds: 1));
+      checkForDoc();
       Navigator.pushNamed(context, '/landingpage');
     } 
     on FirebaseAuthException catch(e) {

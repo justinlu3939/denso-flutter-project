@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/firestoreget.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -37,9 +37,10 @@ class ScrollView extends StatelessWidget {
   Widget build(BuildContext context) {
     var currentUser = FirebaseAuth.instance.currentUser;
     String? displayPhoto = currentUser?.photoURL;
-    String? name = currentUser?.displayName;
-    String? email = currentUser?.email;
-    final _firebase = FirebaseFirestore.instance;
+
+    //use this to replace name and email above
+    //add a doc reference check and grabber here for name and email
+    //this will replace the email and name
 
     // TODO: implement build
     return SingleChildScrollView(
@@ -63,13 +64,34 @@ class ScrollView extends StatelessWidget {
             const SizedBox(height: 20,),
 
             //for these make sure you can grab the emails and names from the firebase docs based on the IDs
-            Text(
-              name ?? 'Guest',
-              style: const TextStyle(fontSize: 20),
-            ),
-            Text(
-              email ?? 'Unknown email',
-              style: const TextStyle(fontSize: 20),
+            FutureBuilder<List<Map<String, dynamic>>>(
+              future: getFromDoc(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                  var userData = snapshot.data!.first;
+                  String displayName = userData['name'];
+                  String email = userData['email'];
+                  return Column(
+                    children: [
+                      Text(
+                      displayName,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      email,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    ],
+                  );
+                }
+                else {
+                  return const Text('error');
+                }
+              },
             ),
             const SizedBox(height: 20,),
             SizedBox(
