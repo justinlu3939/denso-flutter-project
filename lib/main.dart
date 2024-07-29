@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/pages/ItemList.dart';
 import 'package:my_app/pages/Homepage.dart';
 import 'package:my_app/pages/demoPageForFilterItem.dart';
+import 'package:my_app/pages/editProfile.dart';
 import 'package:my_app/pages/favorites.dart';
 import 'package:my_app/pages/forgotpw.dart';
 import 'package:my_app/pages/login.dart';
@@ -135,6 +136,7 @@ class _MyAppState extends State<MyApp> {
               '/demoPage': (context) => demoPage(),
               '/profile': (context) => Profile(),
               '/favorite': (context) => Favorites(),
+              '/editprofile': (context) => Editprofile(),
             },
           );
         },

@@ -1,27 +1,24 @@
-import 'package:my_app/pages/login.dart';
-import 'package:my_app/auth.dart';
-//import 'package:flutter/gestures.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_app/auth.dart';
 
-class Signup extends StatelessWidget {
-  Signup({super.key});
-
-  final TextEditingController _emailController = TextEditingController();
+class Editprofile extends StatelessWidget {
+  Editprofile({super.key});
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      // backgroundColor: Colors.grey[200],
       resizeToAvoidBottomInset: true,
       //bottomNavigationBar: _signin(context),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: 50,
-        leading: const BackButton(color: Colors.black),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -30,10 +27,10 @@ class Signup extends StatelessWidget {
             children: [
               Center(
                 child: Text(
-                  'Register Account',
+                  'Edit Profile',
                   style: GoogleFonts.raleway(
                     textStyle: const TextStyle(
-                      color: Colors.black,
+                      // color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 32
                     )
@@ -43,54 +40,13 @@ class Signup extends StatelessWidget {
               const SizedBox(height: 80,),
                _name(),
                const SizedBox(height: 20,),
-               _emailAddress(),
-               const SizedBox(height: 20,),
                _password(),
                const SizedBox(height: 50,),
-               _signup(context),
+               _editProfile(context),
             ],
           ),
-
       ),
       )
-    );
-  }
-
-  Widget _emailAddress() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Email Address',
-          style: GoogleFonts.raleway(
-            textStyle: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 16
-            )
-          ),
-        ),
-        const SizedBox(height: 16,),
-        TextField(
-          controller: _emailController,
-          style: const TextStyle(color: Colors.black),
-          decoration: InputDecoration(
-            filled: true,
-            hintText: 'name@gmail.com',
-            hintStyle: const TextStyle(
-              color: Color(0xff6A6A6A),
-              fontWeight: FontWeight.normal,
-              fontSize: 14
-            ),
-            fillColor: const Color(0xffF7F7F9) ,
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(14)
-            )
-          ),
-        )
-      ],
     );
   }
 
@@ -171,25 +127,26 @@ class Signup extends StatelessWidget {
     );
   }
 
-  Widget _signup(BuildContext context) {
+  Widget _editProfile(BuildContext context) {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    // currentUser.updateProfile()
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
-          minimumSize: const Size(double.infinity, 60),
-          elevation: 0,
-      ),
+                    backgroundColor: Colors.red,
+                    side: BorderSide.none,
+                    shape: const StadiumBorder(),
+                  ),
       onPressed: () async {
-       await Auth().signup(
-          email: _emailController.text,
-          password: _passwordController.text,
-          name: _nameController.text,
-          context: context
-        );
+        //may not update firestore
+        if(_nameController.text.isNotEmpty) {
+          await currentUser?.updateDisplayName(_nameController.text);
+        }
+        if(_passwordController.text.isNotEmpty) {
+          await currentUser?.updatePassword(_passwordController.text);
+        }
+        Navigator.pop(context);
       },
-      child: const Text("Sign Up",
+      child: const Text("Make Changes",
       style: TextStyle(
         color: Colors.white,
       ),

@@ -42,7 +42,6 @@ class ScrollView extends StatelessWidget {
     //add a doc reference check and grabber here for name and email
     //this will replace the email and name
 
-    // TODO: implement build
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       child: Center(
@@ -98,7 +97,9 @@ class ScrollView extends StatelessWidget {
               width: 250,
               height: 70,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/editprofile');
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     side: BorderSide.none,
