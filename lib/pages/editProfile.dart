@@ -1,7 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_app/auth.dart';
 
 class Editprofile extends StatelessWidget {
   Editprofile({super.key});
@@ -129,28 +129,30 @@ class Editprofile extends StatelessWidget {
 
   Widget _editProfile(BuildContext context) {
     var currentUser = FirebaseAuth.instance.currentUser;
-    // currentUser.updateProfile()
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
+    return SizedBox(
+              width: 250,
+              height: 70,
+              child: ElevatedButton(
+                onPressed: () async {
+                  //may not update firestore
+                  if(_nameController.text.isNotEmpty) {
+                    await currentUser?.updateDisplayName(_nameController.text);
+                    //make a write to the 'name' section to the firestore
+                    await FirebaseFirestore.instance.collection('documents').doc(currentUser?.email).update({'name': _nameController.text});
+                    print('changed names'); //this does change the name but would need to be reloaded
+                  }
+                  if(_passwordController.text.isNotEmpty) {
+                    await currentUser?.updatePassword(_passwordController.text);
+                  }
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     side: BorderSide.none,
                     shape: const StadiumBorder(),
                   ),
-      onPressed: () async {
-        //may not update firestore
-        if(_nameController.text.isNotEmpty) {
-          await currentUser?.updateDisplayName(_nameController.text);
-        }
-        if(_passwordController.text.isNotEmpty) {
-          await currentUser?.updatePassword(_passwordController.text);
-        }
-        Navigator.pop(context);
-      },
-      child: const Text("Make Changes",
-      style: TextStyle(
-        color: Colors.white,
-      ),
-      ),
-    );
+                child: const Text('Make Changes', style: TextStyle(color: Colors.white),),
+              ),
+            );
   }
 }

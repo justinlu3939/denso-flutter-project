@@ -1,4 +1,3 @@
-import 'package:my_app/pages/login.dart';
 import 'package:my_app/auth.dart';
 //import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
