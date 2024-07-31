@@ -14,6 +14,7 @@ class WebViewContainer extends StatefulWidget {
 
 class WebPage extends State<WebViewContainer> {
   late WebViewController controller;
+  bool isLoading = true;
   @override
   Widget build(BuildContext context) {
     final String url;
@@ -84,12 +85,25 @@ class WebPage extends State<WebViewContainer> {
         centerTitle: true,
       ),
       // body: WebViewWidget(controller: controller),
-      body: WebView(
-        initialUrl: url,
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) {
-          controller = webViewController;
-        },
+      body: IndexedStack(
+        index: isLoading ? 0 : 1,
+        children: [
+          const Center(child: CircularProgressIndicator()),
+          WebView(
+            initialUrl: url,
+            javascriptMode: JavascriptMode.unrestricted,
+            onWebViewCreated: (WebViewController webViewController) {
+              controller = webViewController;
+            },
+            onPageFinished: (String url) {
+              if(mounted) {
+                setState(() {
+                isLoading = false;
+              });
+              }
+            },
+          ),
+        ],
       ),
     );
   }
