@@ -5,7 +5,7 @@
 <key>GIDClientID</key>
 <!-- TODO Replace this value: -->
 <!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
-<string>664783939392-dofkhmsa0vung98kqv8kpeh75771d7hl.apps.googleusercontent.com</string>
+<string>664783939392-ijgqclm54sr8hthcj7f680a8k60a3uv5.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBDjLN6dSOHgz6KjZqK6nZyMPVhM7NgNjY</string>
 	<key>GCM_SENDER_ID</key>

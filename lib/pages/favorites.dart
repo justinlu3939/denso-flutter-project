@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 
 class Favorites extends StatefulWidget {
   const Favorites({super.key});
@@ -10,36 +8,6 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
-  final _firebase = FirebaseFirestore.instance;
-
-  @override
-  void initState(){
-    super.initState();
-    //getFavorites();
-    getUserData("wow");
-  }
-
-  void getFavorites() async {
-    await _firebase.collection("documents").get().then((event){
-      for (var doc in event.docs)
-      {
-        print("${doc.id} => ${doc.data()}");
-      }
-    });
-  }
-
-  void getUserData(String uid) async {
-    DocumentReference docRef = _firebase.collection('documents').doc(uid);
-    DocumentSnapshot doc = await docRef.get();
-
-    if(doc.exists) {
-      print('Information - ${doc.data()}');
-    }
-    else {
-      print('nothing exists');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,14 +28,6 @@ class _FavoritesState extends State<Favorites> {
         shadowColor: Colors.black12,
         centerTitle: true,
       ),
-      
-      // if (_firebase.collection. == null)
-      // {
-      //   body: const Placeholder(),
-      // }
-      // else {
-      //   body: ScrollView();
-      // }
       body: const Placeholder(),
     );
   }

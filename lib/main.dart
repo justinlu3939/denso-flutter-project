@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/pages/ItemList.dart';
 import 'package:my_app/pages/Homepage.dart';
 import 'package:my_app/pages/demoPageForFilterItem.dart';
@@ -26,7 +27,10 @@ import 'package:my_app/firebase_options.dart';
 
 import 'package:my_app/pages/signup.dart';
 
+//may need to change void -> Future<void>
 void main() async{
+  await Hive.initFlutter();
+  await Hive.openBox('favorites');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform

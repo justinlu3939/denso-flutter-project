@@ -25,7 +25,7 @@ class demoPage extends StatelessWidget{
         shadowColor: Colors.black12,
         centerTitle: true,
       ),
-      body: ScrollView(),
+      body: const ScrollView(),
     );
   }
 }
@@ -38,6 +38,7 @@ class ScrollView extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          //change the list tiles so that it reads from the favorites in Hive and gets the product data
           ListTile(
             contentPadding: const EdgeInsets.all(20),
             leading: Image.asset('Images/airfilter.png', width: 90, height: 90,),
@@ -52,13 +53,13 @@ class ScrollView extends StatelessWidget {
             //tileColor: Colors.blue,
             hoverColor: Colors.red,
             focusColor: Colors.white,
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: IconButton(onPressed: () {
+              
+            } ,
+            icon: const Icon(Icons.favorite_border_outlined)),
             onTap: () {
               Navigator.pushNamed(context, '/webviewcontainer',
                                   arguments: 'airfilter');
-            },
-            onLongPress: () {
-              print('1');
             },
           ),
           ListTile(
@@ -75,13 +76,10 @@ class ScrollView extends StatelessWidget {
             //tileColor: Colors.blue,
             hoverColor: Colors.red,
             focusColor: Colors.white,
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: const Icon(Icons.favorite_border_outlined),
             onTap: () {
               Navigator.pushNamed(context, '/webviewcontainer',
                                   arguments: 'cabinfilter');
-            },
-            onLongPress: () {
-              print('2');
             },
           ),
           ListTile(
@@ -98,13 +96,10 @@ class ScrollView extends StatelessWidget {
             //tileColor: Colors.blue,
             hoverColor: Colors.red,
             focusColor: Colors.white,
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: const Icon(Icons.favorite_border_outlined),
             onTap: () {
               Navigator.pushNamed(context, '/webviewcontainer',
                                   arguments: 'oilfilter');
-            },
-            onLongPress: () {
-              print('3');
             },
           ),
         ]
