@@ -77,18 +77,18 @@ class ScrollView extends StatelessWidget {
             Navigator.pushNamed(context, '/favorite');
           },
         ),
-        ListTile(
-          contentPadding: const EdgeInsets.all(20),
-          leading: const Icon(Icons.notifications),
-          title: const Text(
-            "Notifications",
-            style: TextStyle(
-              fontSize: 20,
-              fontFamily: 'Arial',
-            ),
-          ),
-          onTap: () {},
-        ),
+        // ListTile(
+        //   contentPadding: const EdgeInsets.all(20),
+        //   leading: const Icon(Icons.notifications),
+        //   title: const Text(
+        //     "Notifications",
+        //     style: TextStyle(
+        //       fontSize: 20,
+        //       fontFamily: 'Arial',
+        //     ),
+        //   ),
+        //   onTap: () {},
+        // ),
       ]),
     );
   }
