@@ -78,15 +78,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  //since it was changed to a stateful widget, we won't need the key
-  //MyApp({Key? key}) : super(key: key);
-
   //this firebase auth code below is a beta implementation for remember me
   var auth = FirebaseAuth.instance;
   var isLogin = false;
-
   bool get _isLogin => isLogin;
-
   checkiflogin () async {
     //User? user = await auth.authStateChanges().first; //if change to statelesswidget, replace bottom line with this
     auth.authStateChanges().listen((User? user) {
@@ -104,7 +99,6 @@ class _MyAppState extends State<MyApp> {
       }
     });
   }
-
   @override
   void initState() {
     checkiflogin();
@@ -113,6 +107,10 @@ class _MyAppState extends State<MyApp> {
   }
   //it ends here. if you need to remove this feature. Delete this code and change the MyApp back to Stateless
 
+  //the code below is for the app without the check if login state
+
+  //since it was changed to a stateful widget, we won't need the key
+  //MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
