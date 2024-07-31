@@ -41,6 +41,7 @@ class _FavoritesState extends State<Favorites> {
             itemCount: favoriteProducts.length,
             itemBuilder: (context, index) {
               final product = favoriteProducts[index];
+              final productIndex = products.indexOf(product);
               final isFavorite = box.get(products.indexOf(product)) != null;
                 return ListTile(
                 contentPadding: const EdgeInsets.all(20),
@@ -59,17 +60,17 @@ class _FavoritesState extends State<Favorites> {
                 trailing: IconButton(onPressed: () async {
                   ScaffoldMessenger.of(context).clearSnackBars();
                   if(isFavorite) {
-                    await box.delete(index);
+                    await box.delete(productIndex);
                     const snacky = SnackBar(content: Text('Removed from Favorites'), backgroundColor: Colors.red,);
                     ScaffoldMessenger.of(context).showSnackBar(snacky);
                   }
                   else {
-                    await box.put(index, product.name);
+                    await box.put(productIndex, product.name);
                     const snacky = SnackBar(content: Text('Added to Favorites'), backgroundColor: Colors.blue,);
                     ScaffoldMessenger.of(context).showSnackBar(snacky);
                   }
                 } ,
-                icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border_outlined), color: Colors.red,),
+                icon: Icon(isFavorite ? Icons.delete : Icons.delete_forever_outlined), color: Colors.red,),
                 onTap: () {
                   Navigator.pushNamed(context, '/webviewcontainer',
                                       arguments: product.arguments);
