@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_app/components/filterItemData.dart';
 
 class demoPage extends StatelessWidget{
   const demoPage ({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<ProductData> products = getProductData();
     return Scaffold(
-      
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -25,85 +27,51 @@ class demoPage extends StatelessWidget{
         shadowColor: Colors.black12,
         centerTitle: true,
       ),
-      body: const ScrollView(),
-    );
-  }
-}
-
-class ScrollView extends StatelessWidget {
-  const ScrollView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          //change the list tiles so that it reads from the favorites in Hive and gets the product data
-          ListTile(
-            contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/airfilter.png', width: 90, height: 90,),
-            title: const Text(
-              'Air Filter',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Times New Roman',
-              ),
-            ),
-            subtitle: const Text('These filters are used to to clean the air that circulates through your heating and cooling system.'),
-            //tileColor: Colors.blue,
-            hoverColor: Colors.red,
-            focusColor: Colors.white,
-            trailing: IconButton(onPressed: () {
-              
-            } ,
-            icon: const Icon(Icons.favorite_border_outlined)),
-            onTap: () {
-              Navigator.pushNamed(context, '/webviewcontainer',
-                                  arguments: 'airfilter');
-            },
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/cabinfilter.png', width: 90, height: 90,),
-            title: const Text(
-              'Cabin Air Filter',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Times New Roman',
-              ),
-            ),
-            subtitle: const Text('These filters are used to help keep the vehicle air clean and fresh.'),
-            //tileColor: Colors.blue,
-            hoverColor: Colors.red,
-            focusColor: Colors.white,
-            trailing: const Icon(Icons.favorite_border_outlined),
-            onTap: () {
-              Navigator.pushNamed(context, '/webviewcontainer',
-                                  arguments: 'cabinfilter');
-            },
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.all(20),
-            leading: Image.asset('Images/oilfilter.png', width: 90, height: 90,),
-            title: const Text(
-              'Oil Filter',
-              style: TextStyle(
-                fontSize: 20,
-                fontFamily: 'Times New Roman',
-              ),
-            ),
-            subtitle: const Text('These filters are used helps remove contaminants from your car engine\'s oil that can accumulate over time as the oil keeps your engine clean.'),
-            //tileColor: Colors.blue,
-            hoverColor: Colors.red,
-            focusColor: Colors.white,
-            trailing: const Icon(Icons.favorite_border_outlined),
-            onTap: () {
-              Navigator.pushNamed(context, '/webviewcontainer',
-                                  arguments: 'oilfilter');
-            },
-          ),
-        ]
-      )
+      body: ValueListenableBuilder(
+        valueListenable: Hive.box('favorites').listenable(), 
+        builder: (context, box, child){
+          return ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              final product = products[index];
+              final isFavorite = box.get(index) != null;
+                return ListTile(
+                contentPadding: const EdgeInsets.all(20),
+                leading: Image.asset(product.image, width: 90, height: 90,),
+                title: Text(
+                  product.name,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Times New Roman',
+                  ),
+                ),
+                subtitle: Text(product.description),
+                //tileColor: Colors.blue,
+                hoverColor: Colors.red,
+                focusColor: Colors.white,
+                trailing: IconButton(onPressed: () async {
+                  ScaffoldMessenger.of(context).clearSnackBars();
+                  if(isFavorite) {
+                    await box.delete(index);
+                    const snacky = SnackBar(content: Text('Removed from Favorites'), backgroundColor: Colors.red,);
+                    ScaffoldMessenger.of(context).showSnackBar(snacky);
+                  }
+                  else {
+                    await box.put(index, product.name);
+                    const snacky = SnackBar(content: Text('Added to Favorites'), backgroundColor: Colors.blue,);
+                    ScaffoldMessenger.of(context).showSnackBar(snacky);
+                  }
+                } ,
+                icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border_outlined), color: Colors.red,),
+                onTap: () {
+                  Navigator.pushNamed(context, '/webviewcontainer',
+                                      arguments: product.arguments);
+                },
+              );
+            }
+          );
+        }
+      ),
     );
   }
 }
