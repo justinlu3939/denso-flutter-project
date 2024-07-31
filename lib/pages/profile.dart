@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/firestoreget.dart';
@@ -48,18 +49,31 @@ class ScrollView extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 20,),
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: NetworkImage(displayPhoto ?? 'https://picsum.photos/id/12/2500/1667'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+            CachedNetworkImage(
+              imageUrl: displayPhoto ?? 'https://picsum.photos/id/12/2500/1667',
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              imageBuilder: (context, imageProvider) {
+              // return Container(
+              //     width: 90,
+              //     height: 90,
+              //     decoration: BoxDecoration(
+              //       image: DecorationImage(image: imageProvider, fit: BoxFit.cover)
+              //     ),
+              //   );
+                return Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      //image: NetworkImage(displayPhoto ?? 'https://picsum.photos/id/12/2500/1667'),
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
             ),
-
             const SizedBox(height: 20,),
 
             //for these make sure you can grab the emails and names from the firebase docs based on the IDs

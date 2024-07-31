@@ -14,6 +14,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:my_app/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 //this code is for creating the side bar for the app.
 class Navbar extends StatelessWidget {
@@ -52,12 +53,26 @@ class Navbar extends StatelessWidget {
                     },
                     child: CircleAvatar(
                       child: ClipOval(
-                        child: Image.network(
-                          displayPhoto ?? 'https://picsum.photos/id/12/2500/1667',
-                          width: 90,
-                          height: 90,
-                          fit: BoxFit.cover,
-                        ),
+                        child: 
+                        CachedNetworkImage(
+                          imageUrl: displayPhoto ?? 'https://picsum.photos/id/12/2500/1667',
+                          placeholder: (context, url) => const CircularProgressIndicator(),
+                          imageBuilder: (context, imageProvider) {
+                            return Container(
+                                width: 90,
+                                height: 90,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(image: imageProvider, fit: BoxFit.cover)
+                                ),
+                              );
+                            },
+                          )
+                        //   Image.network(
+                        //   displayPhoto ?? 'https://picsum.photos/id/12/2500/1667',
+                        //   width: 90,
+                        //   height: 90,
+                        //   fit: BoxFit.cover,
+                        // ),
                       ),
                     ),
                   ),
