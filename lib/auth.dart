@@ -1,8 +1,5 @@
-// import 'dart:math';
-//import 'package:flutter/cupertino.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_app/firestoreentryGoogle.dart';
@@ -25,7 +22,7 @@ class Auth {
       await FirebaseFirestore.instance.collection('documents').doc(user.email).set({
         'name': user.name,
         'email': user.email,
-        //'password': user.password,
+        'password': user.password,
       });
       //will need to pass in the user.name as a parameter for checkForDoc()
       // checkForDoc(); //this function doesn't actually add the user's name into the firestore
