@@ -1,6 +1,4 @@
 // ignore_for_file: use_super_parameters, prefer_const_constructors
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/pages/ItemList.dart';
@@ -77,38 +75,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-  //this firebase auth code below is a beta implementation for remember me
-  var auth = FirebaseAuth.instance;
-  var isLogin = false;
-  bool get _isLogin => isLogin;
-  checkiflogin () async {
-    //User? user = await auth.authStateChanges().first; //if change to statelesswidget, replace bottom line with this
-    auth.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User signed out');
-        setState(() {
-          isLogin = false;
-        });
-      } else {
-        print('User signed in');
-        setState(() {
-          isLogin = true;
-        });
-        //Navigator.pushNamed(context, '/landingpage'); //doesn't work
-      }
-    });
-  }
-  @override
-  void initState() {
-    checkiflogin();
-    super.initState();
-    //print('result$_isLogin');
-  }
-  //it ends here. if you need to remove this feature. Delete this code and change the MyApp back to Stateless
-
-  //the code below is for the app without the check if login state
-
   //since it was changed to a stateful widget, we won't need the key
   //MyApp({Key? key}) : super(key: key);
   @override

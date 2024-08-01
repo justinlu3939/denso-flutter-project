@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:my_app/auth_serviceGoogle.dart';
 import 'package:my_app/components/my_button.dart';
 import 'package:my_app/components/my_textfield.dart';
@@ -8,18 +7,35 @@ import 'package:my_app/components/square_tile.dart';
 import 'package:my_app/auth.dart';
 //import 'package:flutter/gestures.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   // text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  // sign user in method
-  //void signUserIn() {}
-  // void signUserIn(BuildContext context) {
-  //   Navigator.pushNamed(context, '/landingpage');
-  // }
+  var auth = FirebaseAuth.instance;
+  @override
+  void initState() {
+    super.initState();
+    checkiflogin();
+  }
+  void checkiflogin() async {
+    auth.authStateChanges().listen((User? user) {
+      if(user != null) {
+        print('User signed in');
+        Navigator.pushNamed(context, '/landingpage');
+      }
+      else {
+        print('User signed out');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
