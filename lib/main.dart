@@ -1,4 +1,5 @@
 // ignore_for_file: use_super_parameters, prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart' as fs;
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/pages/ItemList.dart';
@@ -11,18 +12,11 @@ import 'package:my_app/pages/login.dart';
 import 'package:my_app/pages/profile.dart';
 import 'package:my_app/pages/settings.dart';
 import 'package:provider/provider.dart';
-//import 'package:webview_flutter/webview_flutter.dart';
 import 'package:my_app/WebViewContainer.dart';
-//import 'package:my_app/login.dart';
-
-//splash screen imports
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
-
-//firebase imports
 import 'package:firebase_core/firebase_core.dart';
 import 'package:my_app/firebase_options.dart';
-
 import 'package:my_app/pages/signup.dart';
 
 //may need to change void -> Future<void>
@@ -33,6 +27,8 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
   );
+  fs.FirebaseFirestore firebase = fs.FirebaseFirestore.instance;
+  firebase.settings = fs.Settings(persistenceEnabled: true);
   runApp(MyApp()); //original run statement
 }
 
