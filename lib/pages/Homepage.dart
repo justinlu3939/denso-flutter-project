@@ -170,6 +170,7 @@ class _HomePageState extends State<HomePage> {
                                       color: Colors.white,
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.none,
                                     ),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -180,6 +181,7 @@ class _HomePageState extends State<HomePage> {
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 15,
+                                      decoration: TextDecoration.none,
                                     ),
                                     maxLines: 2,
                                   ),
