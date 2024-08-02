@@ -5,6 +5,7 @@ import 'package:my_app/components/my_button.dart';
 import 'package:my_app/components/my_textfield.dart';
 import 'package:my_app/components/square_tile.dart';
 import 'package:my_app/auth.dart';
+import 'package:my_app/firestoreentryGoogle.dart';
 //import 'package:flutter/gestures.dart';
 
 class LoginPage extends StatefulWidget {
@@ -169,14 +170,17 @@ class _LoginPageState extends State<LoginPage> {
                     SquareTile(
                       onTap: () async {
                         final result = 
-                        await Auth().signinApple();
+                        await Auth().signInWithApple();
 
-                        if(result is Failure) {
-                          print(result);
-                        } else if(result is User) {
-                          Navigator.pushNamed(context, '/landingpage');
-                        }
-                        
+                        result.fold(
+                          (failure) => print(failure),
+                          (user) {
+                            if(user != null) {
+                              checkForDoc();
+                              Navigator.pushNamed(context, '/landingpage');
+                            }
+                          }
+                        );
                       },
                       imagePath: 'Images/apple.png')
                   ],
