@@ -26,8 +26,8 @@ void checkForDoc() async {
       // Create Firestore entry - the user id is user.email
       // this is for google
       await FirebaseFirestore.instance.collection('documents').doc('$currentEmail').set({
-        'name': currentUser?.displayName ?? 'unknown user',
-        'email': currentEmail ?? 'unknown email',
+        'name': currentUser?.displayName ?? 'Guest',
+        'email': currentEmail ?? 'Guest email',
         //password cannot be read from google accounts. (this also includes apple)
       });
   }
