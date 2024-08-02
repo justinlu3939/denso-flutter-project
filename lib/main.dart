@@ -1,5 +1,6 @@
 // ignore_for_file: use_super_parameters, prefer_const_constructors
-import 'package:cloud_firestore/cloud_firestore.dart' as fs;
+import 'package:cloud_firestore/cloud_firestore.dart' as fs; //fs is needed because we have a settings.dart already
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/pages/ItemList.dart';
