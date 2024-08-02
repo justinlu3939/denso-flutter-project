@@ -5,7 +5,7 @@ import 'package:my_app/components/my_button.dart';
 import 'package:my_app/components/my_textfield.dart';
 import 'package:my_app/components/square_tile.dart';
 import 'package:my_app/auth.dart';
-import 'package:my_app/firestoreentryGoogle.dart';
+import 'package:my_app/firestoreentry.dart';
 //import 'package:flutter/gestures.dart';
 
 class LoginPage extends StatefulWidget {
