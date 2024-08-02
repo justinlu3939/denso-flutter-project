@@ -1,7 +1,7 @@
 // ignore_for_file: use_super_parameters, prefer_const_constructors
 import 'package:cloud_firestore/cloud_firestore.dart' as fs; //fs is needed because we have a settings.dart already
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/pages/ItemList.dart';
 import 'package:my_app/pages/Homepage.dart';
@@ -24,6 +24,8 @@ import 'package:my_app/pages/signup.dart';
 void main() async{
   await Hive.initFlutter();
   await Hive.openBox('favorites');
+  await Hive.openBox('settings');
+  //debugPaintSizeEnabled = false;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
@@ -37,11 +39,29 @@ void main() async{
 //wrap this around the entire app, the button that uses it will have to change all widgets
 class ThemeModel extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.light;
+  final Box settingsBox = Hive.box('settings');
+  ThemeModel() {
+    loadThemeFromHive();
+  }
 
   ThemeMode get themeMode => _themeMode;
 
   void toggleTheme() {
     if (_themeMode == ThemeMode.light) {
+      _themeMode = ThemeMode.dark;
+    } else {
+      _themeMode = ThemeMode.light;
+    }
+    _saveTheme();
+    notifyListeners();
+  }
+
+  void _saveTheme() {
+    settingsBox.put('themeMode', _themeMode == ThemeMode.light ? 'light' : 'dark');
+  }
+  void loadThemeFromHive() {
+    final themeMode = settingsBox.get('themeMode', defaultValue: 'light');
+    if (themeMode == 'dark') {
       _themeMode = ThemeMode.dark;
     } else {
       _themeMode = ThemeMode.light;
