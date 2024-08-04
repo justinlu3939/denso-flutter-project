@@ -58,7 +58,13 @@ class demoPage extends StatelessWidget{
                   }
                   else {
                     await box.put(index, product.name);
-                    const snacky = SnackBar(content: Text('Added to Favorites'), backgroundColor: Colors.blue,);
+                    final snacky = SnackBar(
+                      content: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/favorite');
+                        },
+                        child: const Text('Added to Favorites')), 
+                        backgroundColor: Colors.blue,);
                     ScaffoldMessenger.of(context).showSnackBar(snacky);
                   }
                 } ,
